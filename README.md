@@ -1,4 +1,5 @@
-# student-performance-predictor
+# Student-performance-predictor
+
 🎓 Student Performance Prediction using Machine Learning
 This project uses machine learning to predict student performance based on various demographic and academic features. The goal is to either:
 
