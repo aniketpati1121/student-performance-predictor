@@ -1,0 +1,8 @@
+Student Performance Prediction
+Type: Regression / Classification
+
+Algorithm: Decision Tree / Logistic Regression
+
+Dataset: Student Performance Dataset
+
+Goal: Predict marks or classify pass/fail based on study time, gender, parental education,
