@@ -1,0 +1,11 @@
+student_id,name,gender,study_hours,parent_education,previous_score
+1,Aniket,Male,5,Bachelor,78
+2,Shruti,Female,3,Master,65
+3,Rahul,Male,2,High School,50
+4,Priya,Female,4,Bachelor,70
+5,Aditya,Male,6,Master,85
+6,Neha,Female,1,High School,40
+7,Rohan,Male,3,Bachelor,60
+8,Sanya,Female,5,Master,80
+9,Varun,Male,4,Bachelor,68
+10,Kavya,Female,2,High School,55
