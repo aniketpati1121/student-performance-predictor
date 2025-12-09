@@ -1,8 +1,7 @@
 # MLOps Student Performance Prediction System
 
-A production-ready **end-to-end MLOps project** that demonstrates how to build, track, and deploy a machine learning model using modern MLOps practices.
+A production-ready **end-to-end MLOps project** that demonstrates how to build, track, and deploy a machine learning model using modern MLOps practices.This project focuses on predicting **student performance** and is designed to teach and implement real-world concepts like:
 
-This project focuses on predicting **student performance** and is designed to teach and implement real-world concepts like:
 - Modular ML pipelines
 - Artifacts and logging
 - Model versioning
