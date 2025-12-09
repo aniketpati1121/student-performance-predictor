@@ -25,15 +25,21 @@ A production-ready **end-to-end MLOps project** that demonstrates how to build, 
 ## 📁 Project Structure
 
 mlops-student-performance/
+│
 ├── data/
+│
 ├── src/
 │ ├── data_ingestion.py
 │ ├── preprocessing.py
 │ ├── train.py
 │ └── evaluate.py
+│
 ├── artifacts/
+│
 ├── logs/
+│
 ├── app/
+│
 ├── Dockerfile
 ├── requirements.txt
 └── README.md
