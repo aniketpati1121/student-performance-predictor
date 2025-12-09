@@ -24,6 +24,9 @@ A production-ready **end-to-end MLOps project** that demonstrates how to build, 
 
 ## 📁 Project Structure
 
+
+
+
 mlops-student-performance/
 │
 ├── data/
@@ -38,6 +41,8 @@ mlops-student-performance/
 ├── Dockerfile
 ├── requirements.txt
 └── README.md
+
+
 
 
 ## 📄 License
