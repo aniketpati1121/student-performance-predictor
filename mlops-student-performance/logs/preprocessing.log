@@ -1,0 +1,6 @@
+2025-12-10 09:38:54,810 - INFO - Starting preprocessing...
+2025-12-10 09:38:54,814 - INFO - Data loaded for preprocessing: (10, 6)
+2025-12-10 09:38:54,832 - ERROR - Error in preprocessing: could not convert string to float: 'Neha'
+2025-12-10 09:42:19,593 - INFO - Starting preprocessing...
+2025-12-10 09:42:19,596 - INFO - Data loaded for preprocessing: (10, 6)
+2025-12-10 09:42:19,618 - INFO - Preprocessing completed successfully
