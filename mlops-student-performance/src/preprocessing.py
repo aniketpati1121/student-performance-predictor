@@ -1,100 +1,43 @@
-import os
-import pandas as pd
-import logging
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, LabelEncoder
+import streamlit as st
 import joblib
+import numpy as np
+import os
 
-# PATHS 
+# PATHS
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "..", "artifacts", "model", "student_model.pkl")
+SCALER_PATH = os.path.join(BASE_DIR, "..", "artifacts", "scaler.pkl")
 
-RAW_DATA_PATH = os.path.join("artifacts", "raw_data", "raw_student_data.csv")
-PROCESSED_DATA_DIR = os.path.join("artifacts", "processed_data")
-LOG_DIR = "logs"
-SCALER_PATH = os.path.join("artifacts", "scaler.pkl")
+# LOAD OBJECTS 
+scaler = joblib.load(SCALER_PATH)
 
-# CREATE DIRS 
+#  UI
+st.title("🎓 Student Performance Predictor")
+st.write("Fill the student details to predict the score")
 
-os.makedirs(PROCESSED_DATA_DIR, exist_ok=True)
-os.makedirs(LOG_DIR, exist_ok=True)
+# User Inputs
+gender = st.selectbox("Gender", ["male", "female"])
+study_hours = st.number_input("Study Hours per Day", min_value=0.0, max_value=24.0)
+parent_education = st.selectbox("Parent Education", ["high_school", "bachelor", "master"])
 
-# LOGGING CONFIG 
+# ENCODING 
+gender_encoded = 1 if gender == "male" else 0
 
-logging.basicConfig(
-    filename=os.path.join(LOG_DIR, "preprocessing.log"),
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
-)
+parent_education_map = {
+    "high_school": 0,
+    "bachelor": 1,
+    "master": 2
+}
+parent_education_encoded = parent_education_map[parent_education]
 
-# PREPROCESS FUNCTION 
+# Create input array (must match training feature order)
+input_data = np.array([[gender_encoded, study_hours, parent_education_encoded]])
 
-def preprocess_data():
+# PREDICT 
+if st.button("Predict Performance"):
     try:
-        logging.info("Starting preprocessing...")
-
-        # Load data
-        df = pd.read_csv(RAW_DATA_PATH)
-        logging.info(f"Data loaded for preprocessing: {df.shape}")
-
-        # Fill missing values
-        df.ffill(inplace=True)
-
-        # Encode categorical columns
-        le = LabelEncoder()
-        if 'gender' in df.columns:
-            df['gender'] = le.fit_transform(df['gender'])
-
-        if 'parent_education' in df.columns:
-            df['parent_education'] = le.fit_transform(df['parent_education'])
-
-        # Drop useless columns
-        columns_to_drop = []
-        if 'name' in df.columns:
-            columns_to_drop.append('name')
-        if 'student_id' in df.columns:
-            columns_to_drop.append('student_id')
-
-        df.drop(columns=columns_to_drop, inplace=True)
-
-        # Features and target
-        X = df.drop(columns=["previous_score"])
-        y = df["previous_score"]
-
-        # Train-test split
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=0.2, random_state=42
-        )
-
-        # Feature scaling
-        scaler = StandardScaler()
-        X_train_scaled = scaler.fit_transform(X_train)
-        X_test_scaled = scaler.transform(X_test)
-
-        # Save processed data
-        pd.DataFrame(X_train_scaled).to_csv(
-            os.path.join(PROCESSED_DATA_DIR, "X_train.csv"), index=False
-        )
-        pd.DataFrame(X_test_scaled).to_csv(
-            os.path.join(PROCESSED_DATA_DIR, "X_test.csv"), index=False
-        )
-        y_train.to_csv(
-            os.path.join(PROCESSED_DATA_DIR, "y_train.csv"), index=False
-        )
-        y_test.to_csv(
-            os.path.join(PROCESSED_DATA_DIR, "y_test.csv"), index=False
-        )
-
-        # Save scaler
-        joblib.dump(scaler, SCALER_PATH)
-
-        logging.info("Preprocessing completed successfully")
-        print("Preprocessing completed successfully!")
-
+        scaled_input = scaler.transform(input_data)
+        prediction = model.predict(scaled_input)
+        st.success(f"Predicted Student Score: {prediction[0]:.2f}")
     except Exception as e:
-        logging.error(f"Error in preprocessing: {e}")
-        raise e
-
-
-# RUN SCRIPT 
-
-if __name__ == "__main__":
-    preprocess_data()
+        st.error(f"Error during prediction: {e}")

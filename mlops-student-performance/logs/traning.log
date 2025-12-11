@@ -1,0 +1,6 @@
+2025-12-10 10:53:29,000 - INFO - Starting model training...
+2025-12-10 10:53:29,005 - INFO - Training data loaded: X_train: (8, 3)
+2025-12-10 10:53:29,005 - INFO - Testing data loaded: X_test: (2, 3)
+2025-12-10 10:53:29,015 - INFO - Model Evaluation - MSE: 9.281537317468958
+2025-12-10 10:53:29,015 - INFO - Model Evaluation - R2 Score: -3.1251276966528705
+2025-12-10 10:53:29,016 - INFO - Model saved at artifacts/model/student_model.pkl
